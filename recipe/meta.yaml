@@ -7,21 +7,21 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/bagit_profile-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/bagit_profile-{{ version }}.tar.gz
   sha256: 57798cdcf98b32a413edb29382d85f4f8c44d3204940d7e12d84998521a98c3f
 
 build:
-  number: 0
+  number: 1
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
 
 requirements:
   host:
     - pip
-    - python >=3
+    - python {{ python_min }}
   run:
     - bagit
-    - python >=3
+    - python >={{ python_min }}
     - requests
 
 test:
@@ -31,6 +31,7 @@ test:
     - pip check
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://github.com/bagit-profiles/bagit-profiles-validator
